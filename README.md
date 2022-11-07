@@ -17,7 +17,7 @@
 Форма изначально есть в HTML документе. Пользователь будет вводить строку для
 поиска в текстовое поле, а при сабмите формы необходимо выполнять HTTP-запрос.
 ***
-<
+   <pre><code>
    <form class="search-form" id="search-form">
      <input
        type="text"
@@ -27,7 +27,8 @@
      />
      <button type="submit">Search</button>
    </form>
->
+   </code></pre>
+
 ***
 ## HTTP-запросы
 
