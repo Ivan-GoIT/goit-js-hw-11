@@ -8,20 +8,20 @@
   </head>
   <body>
     <header class="header">
-      <form class="search-form" id="search-form">
+      <form class="search-form" id="search-form" >
         <input
           type="text"
           name="searchQuery"
           autocomplete="off"
           placeholder="Search images..."
         />
-        <button type="submit">Search</button>
+        <button type="submit">
+          <svg class="search-form-icon"><use href="./images/svg/sprite.svg#icon-search"></use></svg>
+        </button>
       </form>
     </header>
     <section>
-        <div class="imgs-box">
-            
-        </div>
+      <div class="imgs-box"></div>
     </section>
     <script src="./js/index.js" type="module"></script>
   </body>

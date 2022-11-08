@@ -1,0 +1,35 @@
+@import '../../node_modules/modern-normalize/modern-normalize.css';
+
+.header {
+  background-color: #3b59b4;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  box-shadow:  0 1px 4px 1 grey;
+  & > .search-form {
+    --form-height: 30px;
+    height: var(--form-height);
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    & > [name='searchQuery'] {
+      border: none;
+    }
+
+    & > [type='submit'] {
+      position: absolute;
+      right: 0;
+      width: var(--form-height);
+      & > .search-form-icon {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    & > input,
+    & > button {
+      outline: none;
+      border: none;
+      height: inherit;
+    }
+  }
+}
