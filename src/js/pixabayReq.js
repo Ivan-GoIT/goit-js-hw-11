@@ -1,14 +1,41 @@
 import axios from 'axios';
 
-const PIXABAY_KEY = '31151048-14715764b2774648f52159790';
 const URL = 'https://pixabay.com/api/';
 
-export default pixabayReq = (searchQuery,page) => {
+const transformResponse = res => {
+  return res.data.hits.map(
+    ({
+      likes,
+      views,
+      comments,
+      downloads,
+      previewURL,
+      tags,
+      webformatURL,
+      largeImageURL,
+      fullHDURL,
+    }) => ({
+      likes,
+      views,
+      comments,
+      downloads,
+      previewURL,
+      tags,
+      webformatURL,
+      largeImageURL,
+      fullHDURL,
+    })
+  );
+};
+
+export default pixabayReq = (searchQuery) => {
   const params = {
     key: '31151048-14715764b2774648f52159790',
-    url: 'https://pixabay.com/api/',
     q: searchQuery,
-    per_page:10
+    per_page: 10,
   };
-  axios.get(URL, { params }).then(res=>res.data.hits).then(console.log);
+
+  return axios
+    .get(URL, { params })
+    .then(transformResponse);
 };

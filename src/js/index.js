@@ -1,13 +1,17 @@
 import '../sass/common.scss';
-import { inputEl, searchFormEl } from './refs';
+import { inputEl, searchFormEl, galleryEl } from './refs';
 import pixabayReq from './pixabayReq';
-
-const MY_KEY = '31151048-14715764b2774648f52159790';
+import markup from './markup';
+import Gallery from './Gallery';
 
 const onSubmit = async e => {
   e.preventDefault();
   const searchQuery = inputEl.value.replace(' ', '+').trim();
-    const request = await pixabayReq(searchQuery);
+  const gallery = new Gallery(searchQuery);
+  const images = await gallery.getPicturePage();
+  //const images = await new Gallery(searchQuery).getPicturePage();
+  // const images = await pixabayReq(searchQuery);
+  galleryEl.innerHTML = markup(images);
 };
 
 searchFormEl.addEventListener('submit', onSubmit);
