@@ -28,14 +28,12 @@ const transformResponse = res => {
   );
 };
 
-export default pixabayReq = (searchQuery) => {
+export default pixabayReq = searchQuery => {
   const params = {
     key: '31151048-14715764b2774648f52159790',
     q: searchQuery,
     per_page: 10,
   };
 
-  return axios
-    .get(URL, { params })
-    .then(transformResponse);
+  return axios.get(URL, { params }).then(transformResponse);
 };

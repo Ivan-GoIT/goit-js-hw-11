@@ -9,9 +9,7 @@ const onSubmit = async e => {
   const searchQuery = inputEl.value.replace(' ', '+').trim();
   const gallery = new Gallery(searchQuery);
   const images = await gallery.getPicturePage();
-  //const images = await new Gallery(searchQuery).getPicturePage();
-  // const images = await pixabayReq(searchQuery);
   galleryEl.innerHTML = markup(images);
 };
-
+inputEl.focus();
 searchFormEl.addEventListener('submit', onSubmit);

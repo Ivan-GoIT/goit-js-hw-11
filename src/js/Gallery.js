@@ -10,7 +10,7 @@ export default class Gallery {
       key: this.#PIXABAY_KEY,
       q: searchQuery,
       per_page: 10,
-     // page: this.#page,
+      page: this.#page,
     };
   }
 
@@ -40,13 +40,10 @@ export default class Gallery {
     );
   };
 
-  get params() {
-    return this.#params;
-  }
-
   getPicturePage() {
     return axios
-      .get(this.#URL, { ...this.#params })
+      .get(this.#URL, { params: this.#params })
       .then(this.#transformResponse);
   }
+
 }
