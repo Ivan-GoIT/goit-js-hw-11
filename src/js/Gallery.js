@@ -15,7 +15,7 @@ export default class Gallery {
   }
 
   #transformResponse = res => {
-    return res.data.hits.map(
+    const imgArray = res.data.hits.map(
       ({
         likes,
         views,
@@ -26,6 +26,7 @@ export default class Gallery {
         webformatURL,
         largeImageURL,
         fullHDURL,
+        totalHits,
       }) => ({
         likes,
         views,
@@ -36,8 +37,10 @@ export default class Gallery {
         webformatURL,
         largeImageURL,
         fullHDURL,
+        totalHits,
       })
     );
+    return { totalHits: res.data.totalHits, images: imgArray };
   };
 
   getPicturePage() {
@@ -45,5 +48,4 @@ export default class Gallery {
       .get(this.#URL, { params: this.#params })
       .then(this.#transformResponse);
   }
-
 }
