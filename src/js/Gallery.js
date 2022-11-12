@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 export default class Gallery {
-  #PIXABAY_KEY = '31151048-14715764b2774648f52159790';
-  #URL = 'https://pixabay.com/api/';
-  #page = 1;
-  #params = {};
-  constructor(searchQuery) {
-    this.#params = {
-      key: this.#PIXABAY_KEY,
-      q: searchQuery,
-      per_page: 10,
-      page: this.#page,
-    };
+  #URL = '';
+  #params = {
+    key: '',
+    q: '',
+    per_page: null,
+    page: 1,
+  };
+  constructor() {
+    this.#URL = 'https://pixabay.com/api/';
+    this.#params.key = '31151048-14715764b2774648f52159790';
+    this.#params.per_page = 20;
   }
 
   #transformResponse = res => {
@@ -46,6 +46,14 @@ export default class Gallery {
   getPicturePage() {
     return axios
       .get(this.#URL, { params: this.#params })
-      .then(this.#transformResponse);
+      .then(this.#transformResponse)
+      .then(data => {
+        this.#params.page++;
+        return data;
+      });
+  }
+
+  set query(searchQuery) {
+    this.#params.q = searchQuery;
   }
 }
