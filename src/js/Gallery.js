@@ -1,16 +1,18 @@
 import axios from 'axios';
-
+const PIXABAY_KEY = '31151048-14715764b2774648f52159790';
+const URL = 'https://pixabay.com/api/';
+const params = {
+  key: '',
+  q: '',
+  per_page: null,
+  page: 1,
+};
 export default class Gallery {
   #URL = '';
-  #params = {
-    key: '',
-    q: '',
-    per_page: null,
-    page: 1,
-  };
+  #params = params;
   constructor() {
-    this.#URL = 'https://pixabay.com/api/';
-    this.#params.key = '31151048-14715764b2774648f52159790';
+    this.#URL = URL;
+    this.#params.key = PIXABAY_KEY;
     this.#params.per_page = 20;
   }
 
@@ -55,5 +57,9 @@ export default class Gallery {
 
   set query(searchQuery) {
     this.#params.q = searchQuery;
+  }
+
+  resetPage() {
+    this.#params.page = 1;
   }
 }

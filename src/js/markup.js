@@ -1,9 +1,19 @@
 export default markup = imgList => {
   return imgList
     .map(
-      ({ likes, views, comments, downloads, previewURL, tags }) => `   
+      ({
+        likes,
+        views,
+        comments,
+        downloads,
+        previewURL,
+        tags,
+        largeImageURL,
+      }) => `   
             <div class="photo-card">
-              <img src="${previewURL}" alt="${tags}" loading="lazy" />
+              <a class="img-box" href=${largeImageURL}>
+                <img src="${previewURL}" alt="${tags}" loading="lazy" />
+              </a>
               <div class="info">
                 <p class="info-item">
                   <b>Likes</b>
