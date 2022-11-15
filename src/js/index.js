@@ -3,6 +3,8 @@ import { inputEl, searchFormEl, galleryEl, headerEl } from './refs';
 import markup from './markup';
 import Gallery from './Gallery';
 import notifySender from './notifySender';
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 

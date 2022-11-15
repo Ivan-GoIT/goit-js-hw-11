@@ -8,11 +8,13 @@ export default markup = imgList => {
         downloads,
         webformatURL,
         tags,
+        previewURL,
         largeImageURL,
       }) => `   
             <div class="photo-card">
               <div class="img-box" largeImageURL="${largeImageURL}">
-                <img data-src="${webformatURL}" alt="${tags}"  data-sizes="auto" class="lazyload"/>
+                <img src="${previewURL}"
+                data-src="${webformatURL}" alt="${tags}"  data-sizes="auto" class="lazyload"/>
               </div>
               <div class="info">
                 <p class="info-item">

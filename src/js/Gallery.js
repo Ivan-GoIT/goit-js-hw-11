@@ -28,6 +28,7 @@ export default class Gallery {
         downloads,
         tags,
         webformatURL,
+        previewURL,
         largeImageURL,
         totalHits,
       }) => ({
@@ -36,6 +37,7 @@ export default class Gallery {
         comments,
         downloads,
         tags,
+        previewURL,
         webformatURL,
         largeImageURL,
         totalHits,
