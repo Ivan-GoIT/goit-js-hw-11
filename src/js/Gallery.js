@@ -47,43 +47,41 @@ export default class Gallery {
   };
 
   getPicturePage() {
-    return (
-      axios
-        .get(this.#URL, {
-          params: this.#params,
-          transformResponse: response => {
-            response = JSON.parse(response);
-            const imgArray = response.hits.map(
-              ({
-                likes,
-                views,
-                comments,
-                downloads,
-                tags,
-                webformatURL,
-                previewURL,
-                largeImageURL,
-                totalHits,
-              }) => ({
-                likes,
-                views,
-                comments,
-                downloads,
-                tags,
-                previewURL,
-                webformatURL,
-                largeImageURL,
-                totalHits,
-              })
-            );
-            return { totalHits: response.totalHits, images: imgArray };
-          },
-        })
-        .then(response => {
-          this.#params.page++;
-          return response.data;
-        })
-    );
+    return axios
+      .get(this.#URL, {
+        params: this.#params,
+        transformResponse: response => {
+          response = JSON.parse(response);
+          const imgArray = response.hits.map(
+            ({
+              likes,
+              views,
+              comments,
+              downloads,
+              tags,
+              webformatURL,
+              previewURL,
+              largeImageURL,
+              totalHits,
+            }) => ({
+              likes,
+              views,
+              comments,
+              downloads,
+              tags,
+              previewURL,
+              webformatURL,
+              largeImageURL,
+              totalHits,
+            })
+          );
+          return { totalHits: response.totalHits, images: imgArray };
+        },
+      })
+      .then(response => {
+        this.#params.page++;
+        return response.data;
+      });
   }
 
   set query(searchQuery) {

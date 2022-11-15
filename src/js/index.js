@@ -8,23 +8,21 @@ import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-
 const clearGalleryContainer = () => {
   galleryEl.innerHTML = '';
 };
 
 const connectSimpleLightbox = () => {
-    const simpleLightbox = new SimpleLightbox(
-      'section.gallery > .container > .photo-card > div',
-      {
-        sourceAttr: 'largeImageURL',
-        alertError: false,
-        history: false,
-        animationSpeed:300,
-      }
-    );
-}
-
+  const simpleLightbox = new SimpleLightbox(
+    'section.gallery > .container > .photo-card > div',
+    {
+      sourceAttr: 'largeImageURL',
+      alertError: false,
+      history: false,
+      animationSpeed: 300,
+    }
+  );
+};
 
 const uploadPicturesToGallery = async () => {
   const response = await gallery.getPicturePage();
@@ -32,7 +30,7 @@ const uploadPicturesToGallery = async () => {
     clearGalleryContainer();
     galleryEl.insertAdjacentHTML('beforeEnd', markup(response.images));
   }
-  connectSimpleLightbox()
+  connectSimpleLightbox();
 };
 
 const onSubmit = async e => {
@@ -69,14 +67,11 @@ window.scrollBy({
   behavior: 'smooth',
 });
 
-
 //For testing TEST
 // (async () => {
 //   gallery.query = 'cat';
 //   inputEl.value = 'cat';
 //   const response = await gallery.getPicturePage();
 //   galleryEl.innerHTML = markup(response.images);
-
-
 //   connectSimpleLightbox()
 // })();

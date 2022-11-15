@@ -8,6 +8,6 @@ export default notifySender = length => {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
-      return false;
+    return false;
   }
 };
