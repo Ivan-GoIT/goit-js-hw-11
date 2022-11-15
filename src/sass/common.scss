@@ -1,6 +1,7 @@
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 
 .header {
+  z-index: 10;
   background-color: #3b59b4;
   padding: 10px 0;
   display: flex;

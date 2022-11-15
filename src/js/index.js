@@ -4,9 +4,32 @@ import markup from './markup';
 import Gallery from './Gallery';
 import notifySender from './notifySender';
 import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const clearGalleryContainer = () => {
   galleryEl.innerHTML = '';
+};
+
+const connectSimpleLightbox = () => {
+    const simpleLightbox = new SimpleLightbox(
+      'section.gallery > .container > .photo-card > div',
+      {
+        sourceAttr: 'largeImageURL',
+        alertError: false,
+        history: false,
+        animationSpeed:300,
+      }
+    );
+}
+
+
+const uploadPicturesToGallery = async () => {
+  const response = await gallery.getPicturePage();
+  if (notifySender(response.totalHits)) {
+    clearGalleryContainer();
+    galleryEl.insertAdjacentHTML('beforeEnd', markup(response.images));
+  }
+  connectSimpleLightbox()
 };
 
 const onSubmit = async e => {
@@ -14,52 +37,31 @@ const onSubmit = async e => {
 
   gallery.query = inputEl.value.replace(' ', '+').trim();
   gallery.resetPage();
-  const response = await gallery.getPicturePage();
-  if (notifySender(response.totalHits)) {
-    clearGalleryContainer();
-    galleryEl.insertAdjacentHTML('beforeEnd', markup(response.images));
-  }
-
-
-  
-  //!!!!!!!!!!!!!!!!!InfiniteScroll
-  //   console.log(' перед infScroll');
-  // console.log(typeof response.image);
-  //   const infScroll = new InfiniteScroll(galleryEl, {
-  //     path: markup(response.images),
-  //     append: '.photo-card',
-  //   });
-
-  //     console.log(' после infScroll');
+  uploadPicturesToGallery();
 };
 
-const onClick = async () => {
-  const response = await gallery.getPicturePage();
-  if (notifySender(response.totalHits));
-  galleryEl.insertAdjacentHTML('beforeEnd', markup(response.images));
-};
+//*****For the 'load-more' button */
 
+// const onClick = async () => {
+//   const response = await gallery.getPicturePage();
+//   if (notifySender(response.totalHits));
+//   galleryEl.insertAdjacentHTML('beforeEnd', markup(response.images));
+// };
+// document.querySelector('.load-more').addEventListener('click', onClick);
 
 document.body.style.paddingTop = getComputedStyle(headerEl).height;
 const gallery = new Gallery();
 inputEl.focus();
 searchFormEl.addEventListener('submit', onSubmit);
 
-const lightbox = new SimpleLightbox('.photo-card > .img-box', {
-  captionDelay: 250,
-});
-
-galleryEl.addEventListener('click', e => lightbox.poen(e.target.parentNode));
-
-
-// document.querySelector('.load-more').addEventListener('click', onClick);
 
 //For testing TEST
+// (async () => {
+//   gallery.query = 'cat';
+//   inputEl.value = 'cat';
+//   const response = await gallery.getPicturePage();
+//   galleryEl.innerHTML = markup(response.images);
 
-// (async() => {
-//   const searchQuery = 'cat';
-//   inputEl.value = searchQuery;
-//   const gallery = new Gallery(searchQuery);
-//   const images = await gallery.getPicturePage();
-//   galleryEl.innerHTML = markup(images);
-// })()
+
+//   connectSimpleLightbox()
+// })();

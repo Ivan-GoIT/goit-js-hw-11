@@ -6,14 +6,14 @@ export default markup = imgList => {
         views,
         comments,
         downloads,
-        previewURL,
+        webformatURL,
         tags,
         largeImageURL,
       }) => `   
             <div class="photo-card">
-              <a class="img-box" href=${largeImageURL}>
-                <img src="${previewURL}" alt="${tags}" loading="lazy" />
-              </a>
+              <div class="img-box" largeImageURL="${largeImageURL}">
+                <img data-src="${webformatURL}" alt="${tags}"  data-sizes="auto" class="lazyload"/>
+              </div>
               <div class="info">
                 <p class="info-item">
                   <b>Likes</b>

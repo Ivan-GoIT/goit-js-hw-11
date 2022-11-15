@@ -6,6 +6,9 @@ const params = {
   q: '',
   per_page: null,
   page: 1,
+  image_type: 'photo',
+  orientation: 'horizontal',
+  safesearch: true,
 };
 export default class Gallery {
   #URL = '';
@@ -23,22 +26,18 @@ export default class Gallery {
         views,
         comments,
         downloads,
-        previewURL,
         tags,
         webformatURL,
         largeImageURL,
-        fullHDURL,
         totalHits,
       }) => ({
         likes,
         views,
         comments,
         downloads,
-        previewURL,
         tags,
         webformatURL,
         largeImageURL,
-        fullHDURL,
         totalHits,
       })
     );
