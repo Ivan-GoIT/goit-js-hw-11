@@ -1,4 +1,4 @@
-export default markup = imgList => {
+export default imgList => {
   return imgList
     .map(
       ({
