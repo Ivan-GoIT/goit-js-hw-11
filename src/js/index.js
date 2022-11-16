@@ -1,3 +1,4 @@
+'use strict'
 import '../sass/common.scss';
 import { inputEl, searchFormEl, galleryEl, headerEl } from './refs';
 import markup from './markup';
@@ -7,6 +8,7 @@ import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import infiniteScroll from './infiniteScroll';
 
 const clearGalleryContainer = () => {
   galleryEl.innerHTML = '';
@@ -33,12 +35,17 @@ const uploadPicturesToGallery = async () => {
   connectSimpleLightbox();
 };
 
+const onScroll = () => {
+  infiniteScroll()
+};
+
 const onSubmit = async e => {
   e.preventDefault();
 
   gallery.query = inputEl.value.replace(' ', '+').trim();
   gallery.resetPage();
   uploadPicturesToGallery();
+  galleryEl.addEventListener('scroll', onScroll);
 };
 
 //*****For the 'load-more' button */
