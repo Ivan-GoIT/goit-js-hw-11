@@ -1,6 +1,6 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-export default notifySender = length => {
+export default length => {
   if (length) {
     Notify.success(`Hooray! We found ${length} images`);
     return true;
