@@ -19,33 +19,6 @@ export default class Gallery {
     this.#params.per_page = 20;
   }
 
-  #transformResponse = res => {
-    const imgArray = res.data.hits.map(
-      ({
-        likes,
-        views,
-        comments,
-        downloads,
-        tags,
-        webformatURL,
-        previewURL,
-        largeImageURL,
-        totalHits,
-      }) => ({
-        likes,
-        views,
-        comments,
-        downloads,
-        tags,
-        previewURL,
-        webformatURL,
-        largeImageURL,
-        totalHits,
-      })
-    );
-    return { totalHits: res.data.totalHits, images: imgArray };
-  };
-
   getPicturePage() {
     return axios
       .get(this.#URL, {
