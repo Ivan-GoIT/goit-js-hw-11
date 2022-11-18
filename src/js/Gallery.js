@@ -1,4 +1,5 @@
 import axios from 'axios';
+import notifySender from './notifySender';
 
 const PIXABAY_KEY = '31151048-14715764b2774648f52159790';
 const URL = 'https://pixabay.com/api/';
@@ -17,7 +18,7 @@ export default class Gallery {
   constructor() {
     this.#URL = URL;
     this.#params.key = PIXABAY_KEY;
-    this.#params.per_page = 20;
+    this.#params.per_page = 40;
   }
 
   getPicturePage() {
@@ -25,36 +26,44 @@ export default class Gallery {
       .get(this.#URL, {
         params: this.#params,
         transformResponse: response => {
-          response = JSON.parse(response);
-          const imgArray = response.hits.map(
-            ({
-              likes,
-              views,
-              comments,
-              downloads,
-              tags,
-              webformatURL,
-              previewURL,
-              largeImageURL,
-              totalHits,
-            }) => ({
-              likes,
-              views,
-              comments,
-              downloads,
-              tags,
-              previewURL,
-              webformatURL,
-              largeImageURL,
-              totalHits,
-            })
-          );
-          return { totalHits: response.totalHits, images: imgArray };
+          try {
+            response = JSON.parse(response);
+            response.hits = response.hits.map(
+              ({
+                likes,
+                views,
+                comments,
+                downloads,
+                tags,
+                webformatURL,
+                previewURL,
+                largeImageURL,
+                totalHits,
+              }) => ({
+                likes,
+                views,
+                comments,
+                downloads,
+                tags,
+                previewURL,
+                webformatURL,
+                largeImageURL,
+                totalHits,
+              })
+            );
+          } catch (e) {
+            //заглушка
+          }
+
+          return response;
         },
       })
       .then(response => {
         this.#params.page++;
-        return response.data;
+        return response;
+      })
+      .catch(e => {
+        return e.response;
       });
   }
 
