@@ -4,7 +4,7 @@ export default fetchObj => {
   const notifyParams = {};
   switch (fetchObj.status) {
     case 200:
-      if (fetchObj.data.totalHits) {
+      if (fetchObj.data.hits.length) {
         if (fetchObj.config.params.page !== 1) return true;
         notifyParams.key = 'success';
         notifyParams.message = `Hooray! We found ${fetchObj.data.totalHits} images`;
