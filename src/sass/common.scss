@@ -11,12 +11,14 @@
   left: 0;
   width: 100%;
   box-shadow: 0 1px 4px 1 grey;
+  
   & > .search-form {
     --form-height: 30px;
     height: var(--form-height);
     position: relative;
     border-radius: 4px;
     overflow: hidden;
+
     & > [name='searchQuery'] {
       border: none;
     }
