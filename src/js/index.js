@@ -37,17 +37,15 @@ const connectSimpleLightbox = () => {
 };
 
 const uploadPicturesToGallery = async () => {
+  document.body.style.cursor = 'wait';
   const response = await gallery.getPicturePage();
+  document.body.style.cursor = 'auto';
 
   if (notifySender(response)) {
     galleryEl.insertAdjacentHTML('beforeEnd', markup(response.data.hits));
     sLightbox.refresh();
   }
 };
-
-function onScroll() {
-  infiniteScroll(galleryEl, uploadPicturesToGallery);
-}
 
 const onSubmit = async e => {
   e.preventDefault();
@@ -58,39 +56,13 @@ const onSubmit = async e => {
   uploadPicturesToGallery();
 };
 
-//*****For the 'load-more' button */
-
-// const onClick = async () => {
-//   const response = await gallery.getPicturePage();
-//   if (notifySender(response.totalHits));
-//   galleryEl.insertAdjacentHTML('beforeEnd', markup(response.images));
-// };
-
-// document.querySelector('.load-more').addEventListener('click', onClick);
+const onScroll = () => {
+  infiniteScroll(galleryEl, uploadPicturesToGallery);
+};
 
 document.body.style.paddingTop = getComputedStyle(headerEl).height;
 const gallery = new Gallery();
 const simpleLightbox = {};
 inputEl.focus();
 searchFormEl.addEventListener('submit', onSubmit);
-document.addEventListener('scroll', throttle(onScroll,300));
-
-//плавнв=ая прокрутка
-
-// const { height: cardHeight } = document
-//   .querySelector('.gallery')
-//   .firstElementChild.getBoundingClientRect();
-
-// window.scrollBy({
-//   top: cardHeight * 2,
-//   behavior: 'smooth',
-// });
-
-//For testing TEST
-// (async () => {
-//   gallery.query = 'cat';
-//   inputEl.value = 'cat';
-//   const response = await gallery.getPicturePage();
-//   galleryEl.innerHTML = markup(response.images);
-//   connectSimpleLightbox()
-// })();
+document.addEventListener('scroll', throttle(onScroll, 300));
