@@ -4,7 +4,6 @@ export default fetchObj => {
   const notifyParams = {};
   switch (fetchObj.status) {
     case 200:
-      console.log(fetchObj);
       if (fetchObj.data.totalHits) {
         if (fetchObj.config.params.page !== 1) return true;
         notifyParams.key = 'success';

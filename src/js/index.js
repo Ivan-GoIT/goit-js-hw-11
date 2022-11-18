@@ -46,8 +46,7 @@ const uploadPicturesToGallery = async () => {
 };
 
 function onScroll() {
-  throttle(infiniteScroll(galleryEl, uploadPicturesToGallery),500);
-  // infiniteScroll(galleryEl, uploadPicturesToGallery);
+  infiniteScroll(galleryEl, uploadPicturesToGallery);
 }
 
 const onSubmit = async e => {
@@ -74,7 +73,7 @@ const gallery = new Gallery();
 const simpleLightbox = {};
 inputEl.focus();
 searchFormEl.addEventListener('submit', onSubmit);
-document.addEventListener('scroll', onScroll);
+document.addEventListener('scroll', throttle(onScroll,300));
 
 //плавнв=ая прокрутка
 
