@@ -15,10 +15,17 @@ export default fetchObj => {
       }
       break;
 
+    case 400:
+      if (fetchObj.data === '[ERROR 400] "page" is out of valid range.') {
+        notifyParams.key = 'failure';
+        notifyParams.message =
+          "We're sorry, but you've reached the end of search results.";
+      }
+      break;
+
     default:
       notifyParams.key = 'failure';
-      notifyParams.message =
-        "We're sorry, but you've reached the end of search results.";
+      notifyParams.message = fetchObj.data;
       break;
   }
   Notify[notifyParams.key](notifyParams.message);
